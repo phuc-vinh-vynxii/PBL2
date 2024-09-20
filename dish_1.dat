@@ -1,7 +1,7 @@
 dishID    dishName         PRICE      
 AP0001    Banh Trung       18.000               
 AP0002    Nugger Muc       25.000               
-AP0003    SaladTron        40.000               
+AP0003    SaladTron        40.000   
 MC0001    Mi Y Spaghetti   35.000                  
 MC0002    Ga Ran           35.000          
 MC0003    Hamburger        40.000           
@@ -16,6 +16,5 @@ DE0004    Bong Ngo         30.000
 BE0001    Sua Socola       20.000     
 BE0002    Tra Lipton       17.000      
 BE0003    Pepsi            19.000  	 
-BE0004    7up              19.000     
+BE0004    Senvenup         19.000     
 BE0005    Aquafina         10.000
-

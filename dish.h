@@ -3,6 +3,7 @@ using namespace std;
 #ifndef DISH_H
 #define DISH_H
 class Dish{
+	friend class Orderitem;
 	private:
 		static int Order;
 		static int orderAP;
