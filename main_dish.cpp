@@ -10,5 +10,6 @@ int main() {
 	deleteDish();
 	cout<<endl;
 	a.Output();
+	cout << "HHAHA";
 }
 
