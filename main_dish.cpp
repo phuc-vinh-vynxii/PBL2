@@ -5,11 +5,7 @@ int main() {
 	docFile();
 	Thaydoi();
 	Dish a;
-	a.addDish();
 	a.Output();
-	deleteDish();
-	cout<<endl;
-	a.Output();
-	cout << "HHAHA";
+
 }
 
