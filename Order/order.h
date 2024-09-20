@@ -13,9 +13,10 @@ class Order{
         static int orderCount;
     public:
         Order(); //create order ID
-        void deleteOrder();
+        void cancelOrder();
         void showList();
         double strToDouble(const string&); // giong ham friend ben class OrderItem
         string IntToStr(int a);
+        vector<string> split(const string&, char);
 };
 #endif
