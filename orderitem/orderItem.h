@@ -1,11 +1,9 @@
 #include <iostream>
-#include "../dish.h"
+#include "../dish/dish.h"
 using namespace std;
 #ifndef ORDERITEM_H
 #define ORDERITEM_H
 class OrderItem{
-    private:
-
     public:
         void OrderItem_Output();
         void OrderItem_outputAP();
