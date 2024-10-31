@@ -1,4 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
 using namespace std;
 #ifndef DISH_H
 #define DISH_H
@@ -27,6 +32,6 @@ class Dish{
 		static int& getDE();
 		static int& getBE();
 		void addDish();
-		friend void deleteDish();
+		void deleteDish();
 };
 #endif

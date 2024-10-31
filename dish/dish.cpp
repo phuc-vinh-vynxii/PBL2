@@ -1,11 +1,17 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
 #include "dish.h"
 using namespace std;
 #include <fstream>
-// xu li static
+
 string AP,MC,DE,BE;
-void docFile(){
-	ifstream file("dish_1.dat");
+
+void read_File(){
+	ifstream file("Dish/dish.dat");
 	if(!file.is_open()){
 		cerr<<"ERROR FILE"<<endl;
 	}
@@ -51,11 +57,13 @@ void docFile(){
 	}
 	file.close();	
 }
+
 int Dish::orderAP=0;
 int Dish::orderMC=0;
 int Dish::orderDE=0;
 int Dish::orderBE=0;
-int Change(string tmp){
+
+int ConvertString(string tmp){
 	int size=tmp.size();
 	int dem=0;
 	while(size--){
@@ -63,34 +71,40 @@ int Change(string tmp){
 	}
 	return dem;
 }
-void Thaydoi(){
-	Dish::getAP()=Change(AP);
-	Dish::getMC()=Change(MC);
-	Dish::getDE()=Change(DE);
-	Dish::getBE()=Change(BE);
+
+void Change(){
+	Dish::getAP()=ConvertString(AP);
+	Dish::getMC()=ConvertString(MC);
+	Dish::getDE()=ConvertString(DE);
+	Dish::getBE()=ConvertString(BE);
 }
+
 int& Dish::getAP(){
 	return orderAP;
 }
+
 int& Dish::getMC(){
 	return orderMC;
 }
+
 int& Dish::getDE(){
 	return orderDE;
 }
+
 int& Dish::getBE(){
 	return orderBE;
 }
-//
+
 int Dish::Order=orderAP+orderMC+orderDE+orderBE;
 Dish::Dish(){
 	Order++;
 };
-//ADD
+
 string name_add,id_add,price_add;
+
 void Dish::addDish(){
 	Input();
-	fstream file("dish_1.dat", ios::in | ios::out | ios::ate);
+	fstream file("Dish/dish.dat", ios::in | ios::out | ios::ate);
 	if(!file.is_open()){
 		cerr<<"ERROR FILE"<<endl;
 	}
@@ -103,17 +117,16 @@ void Dish::addDish(){
 	file.close();
 }
 
-//END ADD
-//DELETE
-void deleteDish(){
-	ifstream fileIn("dish_1.dat");
+void Dish::deleteDish(){
+	Output();
+	ifstream fileIn("Dish/dish.dat");
 	if (!fileIn){
-		cerr << "Khong the mo danh sach mon an!" << endl;
+		cerr << "ERROR FILE" << endl;
 		return;
 	}
 	vector<string> dishList;
 	string ID_delete;
-	cout << "Nhap ID mon an can xoa:";
+	cout << "NHAP ID MON AN CAN XOA:";
 	getline(cin, ID_delete);
 	bool found = false;
 	string dish;
@@ -129,9 +142,9 @@ void deleteDish(){
 	fileIn.close();
 
 	if (found){
-		ofstream fileOut("dish_1.dat");
+		ofstream fileOut("Dish/dish.dat");
 		if (!fileOut) {
-			cerr << "Khong the mo danh sach mon an!" << endl;
+			cerr << "ERROR FILE" << endl;
 			return;
 		}
 		else{
@@ -140,23 +153,23 @@ void deleteDish(){
 			}
 		}
 		fileOut.close();
-		cout << "Đã xóa món ăn với ID:" << ID_delete << endl;
+		cout << "DA XOA MON CO ID:" << ID_delete << endl;
 	}
 	else{
-		cout << "Không tìm thấy món ăn với ID:" << ID_delete << endl;
+		cout << "KHONG TIM THAY MON AN VOI ID:" << ID_delete << endl;
 	}
 }
-//END DELETE
+
 void Dish::Input(){
 	cout << "-------------------------" << endl;
-	cout << "1. ADD APPETIZER" << endl;		
-	cout << "2. ADD MAIN COURSE" << endl;
-	cout << "3. ADD DESSERT" << endl;
-	cout << "4. ADD BEVERAGE" << endl;
-	cout << "5. RETURN" << endl;
+	cout << "1. THEM MON KHAI VI (APPETIZER)" << endl;		
+	cout << "2. THEM MON CHINH (MAIN COURSE)" << endl;
+	cout << "3. THEM MON TRANG MIENG (DESSERT)" << endl;
+	cout << "4. THEM DO UONG (BEVERAGE)" << endl;
+	cout << "5. KET THUC" << endl;
 	cout << "-------------------------" << endl;
 	int t;
-	cout << "ENTER THE OPTION: ";
+	cout << "| NHAP LUA CHON: ";
 	cin >> t;
 	cin.ignore();
 	if(t==1){
@@ -205,11 +218,10 @@ void Dish::Input(){
 	cout<<"PRICE: ";
 	getline(cin,Price);	
 	price_add=Price;
-
 }
-//OUTPUT
+
 void Dish::Output(){
-	ifstream file("dish_1.dat");
+	ifstream file("Dish/dish.dat");
 	if(!file.is_open()){
 		cerr<<"ERROR FILE"<<endl;
 	}
@@ -219,109 +231,84 @@ void Dish::Output(){
 	}
 	file.close();
 }
+
 void Dish::outputAP(){
-	ifstream inputFile("dish_1.dat");
+	ifstream inputFile("Dish/dish.dat");
 	if(!inputFile.is_open()){
 		cerr<<"ERROR FILE"<<endl;
 	}
-	// ofstream outputFile(dish_2.dat,ios::out | ios::app);
-	// if(!outputFile(dish_2.dat)){
-	// 	cerr<<"ERROR FILE"<<endl;
-	// }
 	vector<string> dishList;
 	string line;
-	// outputFile<<"dishID    dishName         PRICE"<<endl;
 	dishList.push_back("dishID    dishName         PRICE");
 	while(getline(inputFile,line)){
 		string tmp=line.substr(0,2);
 		if(tmp=="AP"){
-			//outputFile<<line<<endl;
 			dishList.push_back(line);
 		}
 	}
 	inputFile.close();
-	// outputFile.close();
 	for(int i=0;i<dishList.size();i++){
 		cout<<dishList[i]<<endl;
 	}
 }
+
 void Dish::outputMC(){
-	ifstream inputFile("dish_1.dat");
+	ifstream inputFile("Dish/dish.dat");
 	if(!inputFile.is_open()){
 		cerr<<"ERROR FILE"<<endl;
 	}
-	// ofstream outputFile(dish_2.dat,ios::out | ios::app);
-	// if(!outputFile(dish_2.dat)){
-	// 	cerr<<"ERROR FILE"<<endl;
-	// }
 	vector<string> dishList;
 	string line;
-	// outputFile<<"dishID    dishName         PRICE"<<endl;
 	dishList.push_back("dishID    dishName         PRICE");
 	while(getline(inputFile,line)){
 		string tmp=line.substr(0,2);
 		if(tmp=="MC"){
-			//outputFile<<line<<endl;
 			dishList.push_back(line);
 		}
 	}
 	inputFile.close();
-	// outputFile.close();
 	for(int i=0;i<dishList.size();i++){
 		cout<<dishList[i]<<endl;
 	}
 }
+
 void Dish::outputDE(){
-	ifstream inputFile("dish_1.dat");
+	ifstream inputFile("Dish/dish.dat");
 	if(!inputFile.is_open()){
 		cerr<<"ERROR FILE"<<endl;
 	}
-	// ofstream outputFile(dish_2.dat,ios::out | ios::app);
-	// if(!outputFile(dish_2.dat)){
-	// 	cerr<<"ERROR FILE"<<endl;
-	// }
 	vector<string> dishList;
 	string line;
-	// outputFile<<"dishID    dishName         PRICE"<<endl;
 	dishList.push_back("dishID    dishName         PRICE");
 	while(getline(inputFile,line)){
 		string tmp=line.substr(0,2);
 		if(tmp=="DE"){
-			//outputFile<<line<<endl;
 			dishList.push_back(line);
 		}
 	}
 	inputFile.close();
-	// outputFile.close();
 	for(int i=0;i<dishList.size();i++){
 		cout<<dishList[i]<<endl;
 	}
 }
+
 void Dish::outputBE(){
-	ifstream inputFile("dish_1.dat");
+	ifstream inputFile("Dish/dish.dat");
 	if(!inputFile.is_open()){
 		cerr<<"ERROR FILE"<<endl;
 	}
-	// ofstream outputFile(dish_2.dat,ios::out | ios::app);
-	// if(!outputFile(dish_2.dat)){
-	// 	cerr<<"ERROR FILE"<<endl;
-	// }
 	vector<string> dishList;
 	string line;
-	// outputFile<<"dishID    dishName         PRICE"<<endl;
 	dishList.push_back("dishID    dishName         PRICE");
 	while(getline(inputFile,line)){
 		string tmp=line.substr(0,2);
 		if(tmp=="BE"){
-			//outputFile<<line<<endl;
 			dishList.push_back(line);
 		}
 	}
 	inputFile.close();
-	// outputFile.close();
 	for(int i=0;i<dishList.size();i++){
 		cout<<dishList[i]<<endl;
 	}
 }
-//END OUTPUT
 
