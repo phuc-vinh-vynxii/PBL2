@@ -1,5 +1,10 @@
 #include "menu.h"
 int main(){
-    Menu();
+    while(1){
+        Login();
+        Menu();
+        Logout();
+    }
+ 
     return 0;
 }

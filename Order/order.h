@@ -14,10 +14,11 @@ class Order{
         int quantity;
         int totalPrice;
         static int orderCount;
+
     public:
         // ORDER
         Order();
-        void CreateOrder();
+        void CreateOrder(const string& StaffID);
         void CreateOrderMedium();
         void showList();
         string formatNumber(int number);
@@ -26,6 +27,8 @@ class Order{
         string getOrderID();
         double getTotalPrice();
         void setOrderStatus(int);
+        static int ShiftTotalPrice;
+        static string shifttotalprice;
         // END ORDER
         // ORDERITEM
         void Item_Output();

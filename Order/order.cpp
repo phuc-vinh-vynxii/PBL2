@@ -10,6 +10,8 @@ using namespace std;
 
 // ORDER
 int Order::orderCount = 1;
+int Order::ShiftTotalPrice = 0;
+string Order::shifttotalprice = "";
 
 int Order::StrToInt(string tmp){
 	int a=0;
@@ -23,9 +25,9 @@ int Order::StrToInt(string tmp){
 	return a;    
 }
 
-Order::Order(){}
+Order::Order(){ }
 
-void Order::CreateOrder(){
+void Order::CreateOrder(const string& StaffID){
     string tmp = to_string(orderCount);
     string sub = string(4-tmp.size(), '0') + tmp;
     orderID = "OD" + sub;
@@ -58,6 +60,12 @@ void Order::CreateOrder(){
     ofstream fileOut("Order/order.dat", ios::app);
     fileOut << id  << dishOrder << total_price << endl;
     fileOut.close();
+    string fileName = "Staff/staff_info/Staff_"+StaffID;
+    ofstream fileOutStaff(fileName, ios::app);
+    fileOutStaff<<id  << dishOrder << total_price << endl;
+    fileOutStaff.close();
+    ShiftTotalPrice += totalPrice;
+    shifttotalprice = formatNumber(ShiftTotalPrice);
     orderCount++;
 }
 

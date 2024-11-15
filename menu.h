@@ -7,9 +7,30 @@
 #include "Dish/dish.cpp"
 #include "Order/order.cpp"
 #include "Payment/payment.cpp"
+#include "Staff/staff.cpp"
 using namespace std;
 #ifndef MENU
 #define MENU
+string Global_ID="";
+
+void Login(){
+    while(true){
+        string id,password;
+        cout<<"NHAP ID: ";
+        cin>>id;
+        cout<<"NHAP PASSWORD: ";
+        cin>>password;
+        Staff a;
+        if(!a.login(id, password)){
+            continue;
+        }
+        else{
+            Global_ID=id;
+            break;
+        }
+    }
+}
+
 void Menu(){
     read_File();
     Change();
@@ -46,12 +67,12 @@ void Menu(){
                     items.showList();
                 }
                 if(choose==3){
-                    items.CreateOrder();
+                    items.CreateOrder(Global_ID);
                     items.processPayment();
                     break;
                 }
                 if(choose==4){
-                    items.CreateOrder();
+                    items.CreateOrder(Global_ID);
                     items.cancelPayment();
                     break;
                 }
@@ -87,4 +108,11 @@ void Menu(){
         }
     }
 }
+
+void Logout(){
+    Staff a;
+    a.logout(Global_ID);
+}
+
 #endif
+
